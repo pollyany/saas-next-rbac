@@ -1,28 +1,29 @@
-"use client";
+'use client'
 
-import { AlertTriangle, Loader2 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+import { AlertTriangle, Loader2 } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
-import githubIcon from "@/assets/github-icon.svg";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
+import githubIcon from '@/assets/github-icon.svg'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import { useFormState } from '@/hooks/use-form-state'
 
-import { signInWithEmailAndPassword } from "./actions";
-import { useFormState } from "@/hooks/use-form-state";
+import { signInWithEmailAndPassword } from './actions'
 
 export function SignInForm() {
-  // const [{ errors, message, success }, formAction, isPending] = useActionState(
-  //   signInWithEmailAndPassword,
-  //   { success: false, message: null, errors: null },
-  // )
+  const router = useRouter()
 
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
-    signInWithEmailAndPassword
-  );
+    signInWithEmailAndPassword,
+    () => {
+      router.push('/')
+    },
+  )
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,7 +70,7 @@ export function SignInForm() {
         {isPending ? (
           <Loader2 className="size-4 animate-spin" />
         ) : (
-          "Sign in with e-mail"
+          'Sign in with e-mail'
         )}
       </Button>
 
@@ -84,5 +85,5 @@ export function SignInForm() {
         Sign in with GitHub
       </Button>
     </form>
-  );
+  )
 }
