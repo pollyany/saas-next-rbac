@@ -4,7 +4,7 @@ import { CookiesFn, getCookie } from 'cookies-next/client'
 import ky from 'ky'
 
 export const api = ky.create({
-  prefixUrl: 'https://next-saas-api.rocketseat.dev',
+  prefixUrl: process.env.NEXT_PUBLIC_API_URL,
   hooks: {
     beforeRequest: [
       async (request) => {

@@ -8,10 +8,14 @@ export async function signInWithGithub() {
     "https://github.com"
   );
 
-  githubSignInURL.searchParams.set("client_id", "Ov23lij3uAZEbxHPvjgo");
+  if (!process.env.GITHUB_OAUTH_CLIENT_ID || !process.env.GITHUB_OAUTH_CLIENT_REDIRECT_URI) {
+    throw new Error("Missing GitHub OAuth environment variables");
+  }
+
+  githubSignInURL.searchParams.set('client_id', process.env.GITHUB_OAUTH_CLIENT_ID);
   githubSignInURL.searchParams.set(
-    "redirect_uri",
-    "http://localhost:3000/api/auth/callback"
+    'redirect_uri',
+    process.env.GITHUB_OAUTH_CLIENT_REDIRECT_URI,
   );
   githubSignInURL.searchParams.set("scope", "user");
 
