@@ -8,8 +8,8 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useFormState } from '@/hooks/use-form-state'
+import { createOrganizationAction } from '../create-organization/actions'
 
-import { createOrganizationAction } from './actions'
 
 export function OrganizationForm() {
   const [{ errors, message, success }, handleSubmit, isPending] = useFormState(
