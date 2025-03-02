@@ -18,7 +18,7 @@ export async function getMembers(org: string) {
     next: {
       tags: [`${org}/members`],
     },
-  })
+  }).json<GetMembersResponse>()
 
   return result;
 }
